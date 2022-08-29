@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+
+for cmd in {jq,yq,curl,redocly,git,gh}; do
+  if ! command -v ${cmd} > /dev/null; then
+    >&2 echo "This script requires '${cmd}' to be installed."
+    exit 1
+  fi
+done
+
+REPODIR="$(dirname $(cd "$(dirname "$0")" && pwd -P))"
+nicknames=$(jq -j 'keys | join("|")' "${REPODIR}/cloud-swagger.json")
+
+function updateAll {
+    jq -r 'keys | .[]' "${REPODIR}/cloud-swagger.json" | while read nick; do
+        getUpdate "${nick}"
+    done
+}
+
+function getUpdate {
+    local nickname="$1"
+    local uri=$(jq -r --arg NICK "${nickname}" '.[$NICK]' "${REPODIR}/cloud-swagger.json")
+    local latestEtag=$(jq -r --arg NICK "${nickname}" '.[$NICK] | sort_by(.date) | reverse | .[0].etag' "${REPODIR}/cloud-history.json")
+    echo "${nickname}:"
+    echo "checking ${uri} with ${latestEtag}"
+    curl -s -D "tmp-${nickname}-headers.txt" -H "If-None-Match: ${latestEtag}" -o "tmp-${nickname}-schema.json" "${uri}"
+    if grep -q "etag: .${latestEtag}." "tmp-${nickname}-headers.txt"; then
+        echo "response etag matches, no changes"
+        # throw stuff away
+        rm "tmp-${nickname}-headers.txt"
+        rm "tmp-${nickname}-schema.json"
+    else
+        # do all the things we do when there's a new update
+        local gmdate=$(TZ=UTC date "+%Y-%m-%d")
+        local newEtag=$(egrep 'etag: "([a-z0-9]+)"' "tmp-${nickname}-headers.txt" | tr '\r' ' ' | sed -e 's/etag://g' -e 's/ //g' -e 's/"//g')
+        echo "there's a new update"
+        echo " - date ${gmdate}, etag ${newEtag}"
+        cp "tmp-${nickname}-schema.json" "${nickname}/schema-original.json"
+        jq -r '.' "tmp-${nickname}-schema.json" > "${nickname}/schema.json"
+        yq -P '.' "tmp-${nickname}-schema.json" > "${nickname}/schema.yaml"
+        redocly split "tmp-${nickname}-schema.json" --outDir "${nickname}/modular"
+        jq -r --arg NICK "${nickname}" --arg NEWDATE "${gmdate}" --arg NEWETAG "${newEtag}" '. | .[$NICK] = .[$NICK] + [{etag:$NEWETAG,date:$NEWDATE}]' "${REPODIR}/cloud-history.json" > "${REPODIR}/tmp-cloud-history.json"
+        mv "${REPODIR}/tmp-cloud-history.json" "${REPODIR}/cloud-history.json"
+        # throw stuff away
+        rm "tmp-${nickname}-headers.txt"
+        rm "tmp-${nickname}-schema.json"
+        # commit it and release it
+        cd "${nickname}"
+        git add *.json *.yaml
+        git add modular
+        git commit -m "update-specs: ${gmdate} update"
+        git push
+        gh release create "${gmdate}" --generate-notes
+        cd "${REPODIR}"
+    fi
+}
+
+# We do this as an eval to get all the nicknames separated by pipes to behave properly
+# in the first case condition.
+eval "
+case \$1 in
+  $nicknames)
+    getUpdate \"\$1\";;
+  all)
+    updateAll;;
+esac
+"

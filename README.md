@@ -1,2 +1,4 @@
-# spec-tools
-Goofy tools we use to fetch this stuff.
+# TEAM APIs Tools
+
+The goofy script we use to fetch and update this stuff.
+

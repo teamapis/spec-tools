@@ -1,0 +1,12 @@
+{
+  "atlassian-access": "https://developer.atlassian.com/cloud/admin/organization/swagger.v3.json",
+  "bitbucket": "https://developer.atlassian.com/cloud/bitbucket/swagger.v3.json",
+  "confluence": "https://developer.atlassian.com/cloud/confluence/swagger.v3.json",
+  "jira-platform": "https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json",
+  "jira-platform-v2": "https://developer.atlassian.com/cloud/jira/platform/swagger.v3.json",
+  "jira-service-management": "https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json",
+  "jira-software": "https://developer.atlassian.com/cloud/jira/software/swagger.v3.json",
+  "trello": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+  "user-management": "https://developer.atlassian.com/cloud/admin/user-management/swagger.v3.json",
+  "user-provisioning": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json"
+}
