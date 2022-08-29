@@ -1,2 +1,12 @@
 .envrc
 .DS_Store
+atlassian-access
+bitbucket
+confluence
+jira-platform
+jira-platform-v2
+jira-service-management
+jira-software
+trello
+user-management
+user-provisioning
