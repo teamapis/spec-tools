@@ -10,3 +10,5 @@ jira-software
 trello
 user-management
 user-provisioning
+bin/each-repo
+bin/*.jar
