@@ -1,61 +1,85 @@
 {
   "atlassian-access": [
     {
-      "etag": "653bc3a16f1876eb09df6c9dc33bfbdf",
+      "etag": "\"653bc3a16f1876eb09df6c9dc33bfbdf\"",
       "date": "2022-08-29"
     }
   ],
   "bitbucket": [
     {
-      "etag": "0ab77b16f64a82df3c3a86c3ea918844",
+      "etag": "\"0ab77b16f64a82df3c3a86c3ea918844\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"d9896d40b1d786a1b9f9eb28aa2512a2\"",
+      "date": "2022-08-31"
     }
   ],
   "confluence": [
     {
-      "etag": "ad3d32f6bc096b2a6d35ff3b418c9d42",
+      "etag": "\"ad3d32f6bc096b2a6d35ff3b418c9d42\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"17ac3e53365b00539617436bb6bdc496\"",
+      "date": "2022-08-31"
     }
   ],
   "jira-platform": [
     {
-      "etag": "fd4e5fdb2e25db50088b15d0ca632c04",
+      "etag": "\"fd4e5fdb2e25db50088b15d0ca632c04\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"b2443bed914c9d83e03bb4281cc2bc58\"",
+      "date": "2022-08-31"
     }
   ],
   "jira-platform-v2": [
     {
-      "etag": "b4232fad56fe43e46763e6b9b2aae915",
+      "etag": "\"b4232fad56fe43e46763e6b9b2aae915\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"5c9d5d3eecf617b47b0f00c34be6a467\"",
+      "date": "2022-08-31"
     }
   ],
   "jira-service-management": [
     {
-      "etag": "f6e5bfe8583f8e6fbdf2f294ccdeb8f4",
+      "etag": "\"f6e5bfe8583f8e6fbdf2f294ccdeb8f4\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"0e5beedd002b4f1bdf04b2eb912801e4\"",
+      "date": "2022-08-31"
     }
   ],
   "jira-software": [
     {
-      "etag": "50be1dcb90604fa6e43e5a41463fd923",
+      "etag": "\"50be1dcb90604fa6e43e5a41463fd923\"",
       "date": "2022-08-29"
+    },
+    {
+      "etag": "\"944b04ab00f3b1ddde646d0a4f32a0a3\"",
+      "date": "2022-08-31"
     }
   ],
   "trello": [
     {
-      "etag": "34212303949e93d213f37638af71dcd9",
+      "etag": "\"34212303949e93d213f37638af71dcd9\"",
       "date": "2022-08-29"
     }
   ],
   "user-management": [
     {
-      "etag": "331686032724e3805b363ff63782f1fa",
+      "etag": "\"331686032724e3805b363ff63782f1fa\"",
       "date": "2022-08-29"
     }
   ],
   "user-provisioning": [
     {
-      "etag": "5b356726fe8d546839c76269cb7ce558",
+      "etag": "\"5b356726fe8d546839c76269cb7ce558\"",
       "date": "2022-08-29"
     }
   ]
